@@ -2,23 +2,27 @@
 MovieHub - приложение для получения информации о фильмах и сериалах из разных открытых источников. Информация представляет собой агрегированые данные о запрашиваемом фильме/сериале, как в укороченном виде, так и в развернутом. 
 
 ## <img width="50" height="50" alt="compliance_15266941" src="https://github.com/user-attachments/assets/af535f87-881b-4ca1-8997-b7ca1ce3a427" />  Техническое задание
-Цель проекта: реализовать пулл 
+Цель проекта: пулл api для получения информации о фильмах и сериалах 
 1. Реализовать пулл api для получения информации о фильмах и сериалах:
-* GET /api/search?query=TitleMoovie - поиск фильма/сериалу по названию и вывод краткой информации о нем
-* GET /api/movie/{id} - возвращает расширенные данные по запрашиваемому фильму/сериалу
+   * GET /api/search?query=TitleMoovie - поиск фильма/сериалу по названию и вывод краткой информации о нем
+   * GET /api/movie/{id} - возвращает расширенные данные по запрашиваемому фильму/сериалу
+
+    Источники данных:
+    * TMDB 
+    * KinoPoisk Unofficial API
   
-Источники данных:
-* TMDB 
-* KinoPoisk Unofficial API
+    API источников:
+    * TMDB  GET https://api.themoviedb.org/3/search/movie?query=Inception&api_key=YOUR_KEY (документация https://developer.themoviedb.org/reference/intro/getting-started)
+    * KinoPoisk https://api.kinopoisk.dev/v1.4/movie/search (документация https://api.kinopoisk.dev/documentation#/)
   
-API источников:
-* TMDB  GET https://api.themoviedb.org/3/search/movie?query=Inception&api_key=YOUR_KEY (документация https://developer.themoviedb.org/reference/intro/getting-started)
-* KinoPoisk https://api.kinopoisk.dev/v1.4/movie/search (документация https://api.kinopoisk.dev/documentation#/)
-2. Запросы к источникам выполнять одновременно. Полученную информацию необходим распарсить для создаваемых api.
+2. Запросы к источникам выполнять одновременно. Полученную информацию необходим распарсить для создаваемых api (1).
 3. Сохранять информацию о фильмах в БД. 
 Структура таблиц:
 тут будет структура
 3. Реализовать логику таким образом, что при запросе api сначала проверять информацию в БД, если она есть, выдавать пользователю эту информацию, если нет, то необходимо сделать запрос к источникам данных.
 4. Для кеширования запросов использовать Redis
+
+## Архитектура
+
 
 
