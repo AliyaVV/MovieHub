@@ -1,5 +1,6 @@
 package model
 
+//Структура для агрегированных данных из двух источников, содержит полные расширенные данные
 type MovieEx struct {
 	MovieShort
 	Description string

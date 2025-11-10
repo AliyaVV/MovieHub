@@ -1,5 +1,6 @@
 package model
 
+//структура для агрегированных данных, содержит краткую ифнормацию о фильмах
 type MovieShort struct {
 	runame    string
 	enName    string

@@ -1,5 +1,6 @@
 package model
 
+//структуры для ответоа от TMDB
 //https://api.themoviedb.org/3/search/movie?query=The Departed&include_adult=false&language=en-US&page=1
 type RespTMDBSearchTitle struct {
 	Results []TMDBSearchTitle
