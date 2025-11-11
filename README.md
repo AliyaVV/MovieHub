@@ -29,4 +29,8 @@ MovieHub - приложение для получения информации �
 * Redis
 * Docker
 
-
+## <img width="40" height="40" alt="icons8-tools-40" src="https://github.com/user-attachments/assets/4f1de092-b964-4570-a4d2-9b6db46d70fe" /> Архитектура
+* GO 1.25.1
+* SQLLite ?
+* Redis
+* Docker
