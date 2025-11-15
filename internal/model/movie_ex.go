@@ -1,8 +1,8 @@
 package model
 
 //Структура для агрегированных данных из двух источников, содержит полные расширенные данные
-type MovieEx struct {
-	MovieShort
+type Movie_ex struct {
+	Movie_short
 	Description string
 	Top250      int
 	Ratings
@@ -17,7 +17,7 @@ type MovieEx struct {
 	budget   int
 }
 type MovieGenres struct {
-	name string
+	Name string
 }
 type Ratings struct {
 	KP                 float32
@@ -25,4 +25,8 @@ type Ratings struct {
 	FilmCritic         float32
 	filmCritics        float32
 	russianFilmCritics float32
+}
+
+func (m Movie_ex) GetKPId() string {
+	return m.Movie_short.ExternalId.KPHD
 }

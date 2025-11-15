@@ -1,12 +1,12 @@
 package model
 
 //структура для агрегированных данных, содержит краткую ифнормацию о фильмах
-type MovieShort struct {
-	runame    string
-	enName    string
-	movieType string
-	movieYear string
-	genres    []Genre //берем из MovieEx.go
+type Movie_short struct {
+	Runame    string
+	EnName    string
+	MovieType string
+	MovieYear int
+	Genres    []MovieGenres //берем из MovieEx.go
 	ExternalId
 	Source
 }
@@ -26,4 +26,7 @@ func NewSource() *Source {
 		TMDB: false,
 		KPHD: false,
 	}
+}
+func (m Movie_short) GetKPId() string {
+	return m.ExternalId.KPHD
 }
