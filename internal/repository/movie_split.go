@@ -6,10 +6,14 @@ import (
 	"github.com/AliyaVV/MovieHub/internal/model"
 )
 
-func Movie_Split(i model.MovieModel) {
-	var slMovieShort = []model.Movie_short{}
-	var slMovieEx = []model.Movie_ex{}
-	//s := []string{}
+type MovieModel interface {
+	GetKPId() string
+}
+
+var slMovieShort = []model.Movie_short{}
+var slMovieEx = []model.Movie_ex{}
+
+func Movie_Split(i MovieModel) {
 
 	switch elem := i.(type) {
 	case model.Movie_short:
