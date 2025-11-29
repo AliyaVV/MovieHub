@@ -1,11 +1,13 @@
 package service
 
 import (
+	"sync"
+
 	"github.com/AliyaVV/MovieHub/internal/model"
 	"github.com/AliyaVV/MovieHub/internal/repository"
 )
 
-func Structure_Create() {
+func Structure_Create(wg *sync.WaitGroup) {
 	short_structure := model.Movie_short{
 		Runame:    "Мстители",
 		EnName:    "Avengers",
@@ -44,7 +46,10 @@ func Structure_Create() {
 		Country: "USA",
 	}
 
-	repository.Movie_Split(short_structure)
-	repository.Movie_Split(ex_structure)
+	repository.Ch <- short_structure
+	repository.Ch <- ex_structure
+	wg.Done()
+	//repository.Movie_Split(short_structure)
+	//repository.Movie_Split(ex_structure)
 
 }

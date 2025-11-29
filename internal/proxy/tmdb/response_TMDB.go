@@ -3,16 +3,16 @@ package tmdb
 //структуры для ответоа от TMDB
 //https://api.themoviedb.org/3/search/movie?query=The Departed&include_adult=false&language=en-US&page=1
 type RespTMDBSearchTitle struct {
-	Results []TMDBSearchTitle
+	Results []TMDBSearchTitle `json:"results"`
 }
 
 type TMDBSearchTitle struct {
-	ID          string  `json:"id"`
+	ID          int     `json:"id"`
 	Title       string  `json:"original_title"`
 	Description string  `json:"overview"`
 	Movie_year  string  `json:"release_date"`
 	Rating      float32 `json:"vote_average"`
-	Genre       []int
+	Genre       []int   `json:"genre_ids"`
 }
 
 //https://api.themoviedb.org/3/movie/1422
@@ -21,8 +21,8 @@ type RespTMDBMovieDetail struct {
 	TMDBSearchTitle
 	Budget    int `json:"budget"`
 	Genres    []Genres
-	Country   string `json:"origin_country"`
-	DescShort string `json:"tagline"`
+	Country   []string `json:"origin_country"`
+	DescShort string   `json:"tagline"`
 }
 
 type Genres struct {
