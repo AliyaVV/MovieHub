@@ -16,8 +16,9 @@ func main() {
 	wg := &sync.WaitGroup{}
 
 	wg.Add(8)
+
+	go service.Log_slice(wg)
 	for i := 0; i < 2; i++ {
-		go repository.Log_slice(wg)
 		go service.Structure_Create(wg)
 		go repository.Movie_Split(wg)
 	}

@@ -1,10 +1,12 @@
-package repository
+package service
 
 import (
 	"fmt"
 	"log"
 	"sync"
 	"time"
+
+	"github.com/AliyaVV/MovieHub/internal/repository"
 )
 
 func Log_slice(wg *sync.WaitGroup) {
@@ -17,13 +19,13 @@ func Log_slice(wg *sync.WaitGroup) {
 
 	for range ticker.C {
 
-		curLenShort := len(SlMovieShort)
-		curLenEx := len(SlMovieEx)
+		curLenShort := len(repository.SlMovieShort)
+		curLenEx := len(repository.SlMovieEx)
 
 		if curLenShort > prevLenShort {
 			fmt.Println("больше текущий шорт", curLenShort, "предыдущая", prevLenShort)
 			for i := prevLenShort; i < curLenShort; i++ {
-				log.Println(SlMovieShort[i])
+				log.Println(repository.SlMovieShort[i])
 			}
 			prevLenShort = curLenShort
 
@@ -31,7 +33,7 @@ func Log_slice(wg *sync.WaitGroup) {
 		if curLenEx > prevLenExtend {
 			fmt.Println("больше текущий лонг")
 			for i := prevLenExtend; i < curLenEx; i++ {
-				log.Println(SlMovieEx[i])
+				log.Println(repository.SlMovieEx[i])
 			}
 			prevLenExtend = curLenEx
 		}
