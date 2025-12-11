@@ -23,16 +23,20 @@ func main() {
 	mainContext, mainCancel := context.WithCancel(context.Background())
 	wg := &sync.WaitGroup{}
 
-	wg.Add(8)
-
+	//wg.Add(8)
+	wg.Add(1)
 	go service.Log_slice(wg, mainContext)
+
 	for i := 0; i < 2; i++ {
+		wg.Add(1)
 		go service.Structure_Create(wg, mainContext)
+		wg.Add(1)
 		go repository.Movie_Split(wg, mainContext)
 	}
 	time.Sleep(1 * time.Second)
 	mainCancel()
-	fmt.Println("cancel")
 	wg.Wait()
+
+	fmt.Println("cancel")
 
 }
