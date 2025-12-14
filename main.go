@@ -26,7 +26,7 @@ func main() {
 	for i := 0; i < 2; i++ {
 		wg.Add(1)
 		go service.Structure_Create(wg, mainContext)
-		wg.Add(2)
+		wg.Add(1)
 		go repository.Movie_Split(wg, mainContext)
 	}
 
@@ -35,6 +35,8 @@ func main() {
 	sig := <-sigChan
 	fmt.Println("Сигнал", sig)
 	mainCancel()
+	close(repository.Ch)
 	wg.Wait()
+	fmt.Println("wait завершен")
 
 }

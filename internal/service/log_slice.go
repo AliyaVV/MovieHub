@@ -17,12 +17,12 @@ func Log_slice(wg *sync.WaitGroup, ctx context.Context) {
 	defer wg.Done()
 	prevLenShort := 0
 	prevLenExtend := 0
-	for range ticker.C {
+	for {
 		select {
 		case <-ctx.Done():
 			fmt.Println("logger отменилась")
 			return
-		default:
+		case <-ticker.C:
 			curLenShort := len(repository.SlMovieShort)
 			curLenEx := len(repository.SlMovieEx)
 

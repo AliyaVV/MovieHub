@@ -22,13 +22,17 @@ var SlMovieEx = []model.Movie_ex{}       //делаем публиным
 var mtx sync.Mutex                       //тк происходит запись в слайсы берем обычный mutex, а не RW
 
 func Movie_Split(wg *sync.WaitGroup, ctx context.Context) {
-	//time.Sleep(3 * time.Second)
-	for chstr := range Ch {
+	defer wg.Done()
+	for {
 		select {
 		case <-ctx.Done():
 			fmt.Println("split отменилась")
 			return
-		default:
+		case chstr, ok := <-Ch:
+			if !ok {
+				fmt.Println("Канал закрыт")
+				return
+			}
 			fmt.Println("зашли в фор")
 			switch elem := chstr.(type) {
 			case model.Movie_short:
@@ -44,9 +48,9 @@ func Movie_Split(wg *sync.WaitGroup, ctx context.Context) {
 			default:
 				fmt.Println("default")
 			}
+			time.Sleep(3 * time.Second)
 		}
-		time.Sleep(2 * time.Second)
-		wg.Done()
+
 		fmt.Println("split отработала")
 	}
 }

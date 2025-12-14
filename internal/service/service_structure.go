@@ -11,6 +11,7 @@ import (
 )
 
 func Structure_Create(wg *sync.WaitGroup, ctx context.Context) {
+	defer wg.Done()
 	select {
 	case <-ctx.Done():
 		fmt.Println("str_create отменилась")
@@ -56,8 +57,8 @@ func Structure_Create(wg *sync.WaitGroup, ctx context.Context) {
 
 		repository.Ch <- short_structure
 		repository.Ch <- ex_structure
-		time.Sleep(2 * time.Second)
-		wg.Done()
+		time.Sleep(3 * time.Second)
+
 		fmt.Println("str_create завершилась")
 	}
 
