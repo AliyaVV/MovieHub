@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"sync"
-	"time"
 
 	"github.com/AliyaVV/MovieHub/internal/model"
 )
@@ -48,7 +47,6 @@ func Movie_Split(wg *sync.WaitGroup, ctx context.Context) {
 			default:
 				fmt.Println("default")
 			}
-			time.Sleep(3 * time.Second)
 		}
 
 		fmt.Println("split отработала")

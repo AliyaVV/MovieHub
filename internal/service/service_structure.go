@@ -12,11 +12,14 @@ import (
 
 func Structure_Create(wg *sync.WaitGroup, ctx context.Context) {
 	defer wg.Done()
+	ticker := time.NewTicker(200 * time.Millisecond)
+	defer ticker.Stop()
+
 	select {
 	case <-ctx.Done():
 		fmt.Println("str_create отменилась")
 		return
-	default:
+	case <-ticker.C:
 		short_structure := model.Movie_short{
 			Runame:    "Мстители",
 			EnName:    "Avengers",
