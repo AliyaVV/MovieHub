@@ -1,28 +1,42 @@
 package main
 
 import (
+	"context"
+	"fmt"
+	"os"
+	"os/signal"
 	"sync"
+	"syscall"
 
 	"github.com/AliyaVV/MovieHub/internal/repository"
 	"github.com/AliyaVV/MovieHub/internal/service"
 )
 
 func main() {
-
 	// for i := 0; i <= 3; i++ {
 	// 	service.Structure_Create()
 	// 	time.Sleep(2 * time.Second)
 	// }
+	mainContext, mainCancel := context.WithCancel(context.Background())
 	wg := &sync.WaitGroup{}
 
-	wg.Add(8)
+	wg.Add(1)
+	go service.Log_slice(wg, mainContext)
 
-	go service.Log_slice(wg)
 	for i := 0; i < 2; i++ {
-		go service.Structure_Create(wg)
-		go repository.Movie_Split(wg)
+		wg.Add(1)
+		go service.Structure_Create(wg, mainContext)
+		wg.Add(1)
+		go repository.Movie_Split(wg, mainContext)
 	}
 
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
+	sig := <-sigChan
+	fmt.Println("Сигнал", sig)
+	mainCancel()
+	close(repository.Ch)
 	wg.Wait()
+	fmt.Println("wait завершен")
 
 }
