@@ -2,7 +2,12 @@ package repository
 
 import (
 	"context"
+	"log"
+	"os"
+
 	"fmt"
+
+	"encoding/json"
 	"sync"
 
 	"github.com/AliyaVV/MovieHub/internal/model"
@@ -16,9 +21,29 @@ type MovieModel interface {
 
 var Ch = make(chan MovieModel, 3)
 
-var SlMovieShort = []model.Movie_short{} //делаем публиным
-var SlMovieEx = []model.Movie_ex{}       //делаем публиным
-var mtx sync.Mutex                       //тк происходит запись в слайсы берем обычный mutex, а не RW
+// var SlMovieShort = []model.Movie_short{} //делаем публиным
+// var SlMovieEx = []model.Movie_ex{}       //делаем публиным
+var mtx sync.Mutex //тк происходит запись в слайсы берем обычный mutex, а не RW
+
+type MovieShort []model.Movie_short
+type MovieLong []model.Movie_ex
+
+var SlMovieShort MovieShort
+var SlMovieLong MovieLong
+
+func (mvsh *MovieShort) Add(data model.Movie_short) {
+	mtx.Lock()
+	defer mtx.Unlock()
+	*mvsh = append(*mvsh, data)
+
+}
+
+func (mvlng *MovieLong) Add(data model.Movie_ex) {
+	mtx.Lock()
+	defer mtx.Unlock()
+	*mvlng = append(*mvlng, data)
+
+}
 
 func Movie_Split(wg *sync.WaitGroup, ctx context.Context) {
 	defer wg.Done()
@@ -32,18 +57,13 @@ func Movie_Split(wg *sync.WaitGroup, ctx context.Context) {
 				fmt.Println("Канал закрыт")
 				return
 			}
-			fmt.Println("зашли в фор")
 			switch elem := chstr.(type) {
 			case model.Movie_short:
-				mtx.Lock()
-				SlMovieShort = append(SlMovieShort, elem)
+				SlMovieShort.Add(elem)
 				fmt.Println("Movie_short")
-				mtx.Unlock()
 			case model.Movie_ex:
-				mtx.Lock()
-				SlMovieEx = append(SlMovieEx, elem)
+				SlMovieLong.Add(elem)
 				fmt.Println("Movie_ex")
-				mtx.Unlock()
 			default:
 				fmt.Println("default")
 			}
@@ -51,4 +71,22 @@ func Movie_Split(wg *sync.WaitGroup, ctx context.Context) {
 
 		fmt.Println("split отработала")
 	}
+
+}
+
+func Create_file() {
+
+	fileShort, _ := os.Create("shortSlice.json")
+	data, err := json.MarshalIndent(SlMovieShort, "", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	_, err = fileShort.Write(data)
+
+	fileLong, _ := os.Create("longSlice.json")
+	dataLong, err := json.MarshalIndent(SlMovieLong, "", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	_, err = fileLong.Write(dataLong)
 }

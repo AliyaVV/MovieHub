@@ -24,7 +24,7 @@ func Log_slice(wg *sync.WaitGroup, ctx context.Context) {
 			return
 		case <-ticker.C:
 			curLenShort := len(repository.SlMovieShort)
-			curLenEx := len(repository.SlMovieEx)
+			curLenEx := len(repository.SlMovieLong)
 
 			if curLenShort > prevLenShort {
 				fmt.Println("больше текущий шорт", curLenShort, "предыдущая", prevLenShort)
@@ -37,7 +37,7 @@ func Log_slice(wg *sync.WaitGroup, ctx context.Context) {
 			if curLenEx > prevLenExtend {
 				fmt.Println("больше текущий лонг")
 				for i := prevLenExtend; i < curLenEx; i++ {
-					log.Println(repository.SlMovieEx[i])
+					log.Println(repository.SlMovieLong[i])
 				}
 				prevLenExtend = curLenEx
 			}

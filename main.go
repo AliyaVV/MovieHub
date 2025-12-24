@@ -37,6 +37,6 @@ func main() {
 	mainCancel()
 	close(repository.Ch)
 	wg.Wait()
-	fmt.Println("wait завершен")
+	repository.Create_file()
 
 }
