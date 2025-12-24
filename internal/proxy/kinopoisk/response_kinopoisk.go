@@ -38,13 +38,19 @@ type Vote struct {
 
 // get https://api.poiskkino.dev/v1.4/movie/263531
 type RespKPSearchID struct {
-	ID     int
-	Slogan string
-	Cast   []Actors
+	ID          int       `json:"id"`
+	Slogan      string    `json:"slogan"`
+	Cast        []Actors  `json:"persons"`
+	SeasonsInfo []Seasons `json:"seasonsInfo"`
 }
 type Actors struct {
 	Name        string `json:"name"`
 	EnName      string `json:"enName"`
 	Profession  string `json:"profession"`
 	Description string `json:"description"`
+}
+
+type Seasons struct {
+	number        int
+	episodesCount int
 }

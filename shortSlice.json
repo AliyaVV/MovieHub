@@ -1,0 +1,42 @@
+[
+  {
+    "Runame": "Мстители",
+    "EnName": "Avengers",
+    "MovieType": "movie",
+    "MovieYear": 2012,
+    "Genres": [
+      {
+        "Name": "фантастика"
+      },
+      {
+        "Name": "боевик"
+      },
+      {
+        "Name": "фэнтези"
+      },
+      {
+        "Name": "приключения"
+      }
+    ]
+  },
+  {
+    "Runame": "Мстители",
+    "EnName": "Avengers",
+    "MovieType": "movie",
+    "MovieYear": 2012,
+    "Genres": [
+      {
+        "Name": "фантастика"
+      },
+      {
+        "Name": "боевик"
+      },
+      {
+        "Name": "фэнтези"
+      },
+      {
+        "Name": "приключения"
+      }
+    ]
+  }
+]
