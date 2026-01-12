@@ -18,8 +18,8 @@ func main() {
 	// 	time.Sleep(2 * time.Second)
 	// }
 
-	service.LoadFromFile("E:\\Aliya\\MovieHub\\shortSlice.json", "short")
-	service.LoadFromFile("E:\\Aliya\\MovieHub\\longSlice.json", "long")
+	repository.LoadFromFile("E:\\Aliya\\MovieHub\\shortSlice.json", "short")
+	repository.LoadFromFile("E:\\Aliya\\MovieHub\\longSlice.json", "long")
 	mainContext, mainCancel := context.WithCancel(context.Background())
 	wg := &sync.WaitGroup{}
 

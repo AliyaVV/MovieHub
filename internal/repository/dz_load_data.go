@@ -1,11 +1,9 @@
-package service
+package repository
 
 import (
 	"encoding/json"
 	"fmt"
 	"os"
-
-	"github.com/AliyaVV/MovieHub/internal/repository"
 )
 
 func LoadFromFile(filename string, typeslice string) error {
@@ -28,18 +26,18 @@ func LoadFromFile(filename string, typeslice string) error {
 
 	switch typeslice {
 	case "short":
-		var tempshort repository.MovieShort
+		var tempshort MovieShort
 		if err := json.Unmarshal(data, &tempshort); err != nil {
 			return err
 		}
-		repository.SlMovieShort = append(repository.SlMovieShort, tempshort...)
+		SlMovieShort = append(SlMovieShort, tempshort...)
 
 	case "long":
-		var templong repository.MovieLong
+		var templong MovieLong
 		if err := json.Unmarshal(data, &templong); err != nil {
 			return err
 		}
-		repository.SlMovieLong = append(repository.SlMovieLong, templong...)
+		SlMovieLong = append(SlMovieLong, templong...)
 	}
 	return nil
 
@@ -52,11 +50,11 @@ func LoadFromFile(filename string, typeslice string) error {
 // 	var temp
 
 // 	if targetslice=="MovieShort"{
-// 		var temp repository.MovieShort
+// 		var temp MovieShort
 // 		if err := json.Unmarshal(datasl, &temp); err != nil {
 // 		return err
 // 	} else{
-// 		var temp repository.MovieLong
+// 		var temp MovieLong
 // 		if err := json.Unmarshal(datasl, &temp); err != nil {
 // 		return err
 // 		}
