@@ -15,8 +15,10 @@ func Log_slice(wg *sync.WaitGroup, ctx context.Context) {
 	defer ticker.Stop()
 
 	defer wg.Done()
-	prevLenShort := 0
-	prevLenExtend := 0
+	//prevLenShort := 0
+	//prevLenExtend := 0
+	prevLenShort := len(repository.SlMovieShort)
+	prevLenExtend := len(repository.SlMovieLong)
 	for {
 		select {
 		case <-ctx.Done():

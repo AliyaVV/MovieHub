@@ -17,6 +17,9 @@ func main() {
 	// 	service.Structure_Create()
 	// 	time.Sleep(2 * time.Second)
 	// }
+
+	repository.LoadFromFile("E:\\Aliya\\MovieHub\\shortSlice.json", "short")
+	repository.LoadFromFile("E:\\Aliya\\MovieHub\\longSlice.json", "long")
 	mainContext, mainCancel := context.WithCancel(context.Background())
 	wg := &sync.WaitGroup{}
 
@@ -29,7 +32,6 @@ func main() {
 		wg.Add(1)
 		go repository.Movie_Split(wg, mainContext)
 	}
-
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
 	sig := <-sigChan

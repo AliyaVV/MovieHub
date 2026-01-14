@@ -75,18 +75,19 @@ func Movie_Split(wg *sync.WaitGroup, ctx context.Context) {
 }
 
 func Create_file() {
-
-	fileShort, _ := os.Create("shortSlice.json")
+	mtx.Lock()
+	defer mtx.Unlock()
+	//fileShort, _ := os.Create("shortSlice.json")
 	data, err := json.MarshalIndent(SlMovieShort, "", "  ")
 	if err != nil {
 		log.Fatal(err)
 	}
-	_, err = fileShort.Write(data)
+	err = os.WriteFile("shortSlice.json", data, 0644)
 
-	fileLong, _ := os.Create("longSlice.json")
-	dataLong, err := json.MarshalIndent(SlMovieLong, "", "  ")
-	if err != nil {
+	//fileLong, _ := os.Create("longSlice.json")
+	dataLong, err2 := json.MarshalIndent(SlMovieLong, "", "  ")
+	if err2 != nil {
 		log.Fatal(err)
 	}
-	_, err = fileLong.Write(dataLong)
+	err = os.WriteFile("longSlice.json", dataLong, 0644)
 }
