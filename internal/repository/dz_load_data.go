@@ -31,6 +31,7 @@ func LoadFromFile(filename string, typeslice string) error {
 			return err
 		}
 		SlMovieShort = append(SlMovieShort, tempshort...)
+		fmt.Println("загрузка из файла короткий слайс")
 
 	case "long":
 		var templong MovieLong
@@ -38,6 +39,7 @@ func LoadFromFile(filename string, typeslice string) error {
 			return err
 		}
 		SlMovieLong = append(SlMovieLong, templong...)
+		fmt.Println("загрузка из файла длинный слайс")
 	}
 	return nil
 
