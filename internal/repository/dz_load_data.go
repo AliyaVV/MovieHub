@@ -44,24 +44,3 @@ func LoadFromFile(filename string, typeslice string) error {
 	return nil
 
 }
-
-// не смогла вынести запись в слайсы в универсальную функцию из-за того, что
-// не поняла, как объявить temp так, чтобы потом в зависимости от параметра targetslice
-// присвоить  ему разные типы
-// func WriteSlice(datasl []byte, targetslice string) error {
-// 	var temp
-
-// 	if targetslice=="MovieShort"{
-// 		var temp MovieShort
-// 		if err := json.Unmarshal(datasl, &temp); err != nil {
-// 		return err
-// 	} else{
-// 		var temp MovieLong
-// 		if err := json.Unmarshal(datasl, &temp); err != nil {
-// 		return err
-// 		}
-// 	}
-// 	}
-// 	*sl = append(*sl, temp...)
-// 	fmt.Println(*sl)
-// }

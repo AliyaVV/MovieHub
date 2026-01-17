@@ -2,13 +2,13 @@ package model
 
 //структура для агрегированных данных, содержит краткую ифнормацию о фильмах
 type Movie_short struct {
-	Runame    string
-	EnName    string
-	MovieType string
-	MovieYear int
-	Genres    []MovieGenres //берем из MovieEx.go
-	ExternalId
-	Source
+	Runame     string
+	EnName     string
+	MovieType  string
+	MovieYear  int
+	Genres     []MovieGenres //берем из MovieEx.go
+	ExternalId ExternalId
+	Source     Source
 }
 
 type ExternalId struct {
