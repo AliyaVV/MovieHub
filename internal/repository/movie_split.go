@@ -38,11 +38,27 @@ func (mvsh *MovieShort) Add(data model.Movie_short) {
 
 }
 
+func (mvsh MovieShort) AddToFile(filename string) {
+	data, err := json.MarshalIndent(mvsh, "", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = os.WriteFile(filename, data, 0644)
+}
+
 func (mvlng *MovieLong) Add(data model.Movie_ex) {
 	mtx.Lock()
 	defer mtx.Unlock()
 	*mvlng = append(*mvlng, data)
 
+}
+
+func (mvlng MovieLong) AddToFile(filename string) {
+	data, err := json.MarshalIndent(mvlng, "", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = os.WriteFile(filename, data, 0644)
 }
 
 func Movie_Split(wg *sync.WaitGroup, ctx context.Context) {
@@ -60,9 +76,11 @@ func Movie_Split(wg *sync.WaitGroup, ctx context.Context) {
 			switch elem := chstr.(type) {
 			case model.Movie_short:
 				SlMovieShort.Add(elem)
+				SlMovieShort.AddToFile("shortSlice.json")
 				fmt.Println("Movie_short")
 			case model.Movie_ex:
 				SlMovieLong.Add(elem)
+				SlMovieLong.AddToFile("longSlice.json")
 				fmt.Println("Movie_ex")
 			default:
 				fmt.Println("default")

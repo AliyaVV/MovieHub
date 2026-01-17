@@ -18,8 +18,8 @@ func main() {
 	// 	time.Sleep(2 * time.Second)
 	// }
 
-	repository.LoadFromFile("E:\\Aliya\\MovieHub\\shortSlice.json", "short")
-	repository.LoadFromFile("E:\\Aliya\\MovieHub\\longSlice.json", "long")
+	repository.LoadFromFile("D:\\Projects\\MovieHub\\shortSlice.json", "short")
+	repository.LoadFromFile("D:\\Projects\\MovieHub\\longSlice.json", "long")
 	mainContext, mainCancel := context.WithCancel(context.Background())
 	wg := &sync.WaitGroup{}
 
@@ -39,6 +39,6 @@ func main() {
 	mainCancel()
 	close(repository.Ch)
 	wg.Wait()
-	repository.Create_file()
+	//repository.Create_file()
 
 }
