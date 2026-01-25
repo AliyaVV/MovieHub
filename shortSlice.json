@@ -17,7 +17,15 @@
       {
         "Name": "приключения"
       }
-    ]
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
   },
   {
     "Runame": "Мстители",
@@ -37,7 +45,15 @@
       {
         "Name": "приключения"
       }
-    ]
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
   },
   {
     "Runame": "Мстители",
@@ -57,7 +73,15 @@
       {
         "Name": "приключения"
       }
-    ]
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
   },
   {
     "Runame": "Мстители",
@@ -77,6 +101,350 @@
       {
         "Name": "приключения"
       }
-    ]
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
+  },
+  {
+    "Runame": "Мстители",
+    "EnName": "Avengers",
+    "MovieType": "movie",
+    "MovieYear": 2012,
+    "Genres": [
+      {
+        "Name": "фантастика"
+      },
+      {
+        "Name": "боевик"
+      },
+      {
+        "Name": "фэнтези"
+      },
+      {
+        "Name": "приключения"
+      }
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
+  },
+  {
+    "Runame": "Мстители",
+    "EnName": "Avengers",
+    "MovieType": "movie",
+    "MovieYear": 2012,
+    "Genres": [
+      {
+        "Name": "фантастика"
+      },
+      {
+        "Name": "боевик"
+      },
+      {
+        "Name": "фэнтези"
+      },
+      {
+        "Name": "приключения"
+      }
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
+  },
+  {
+    "Runame": "Мстители",
+    "EnName": "Avengers",
+    "MovieType": "movie",
+    "MovieYear": 2012,
+    "Genres": [
+      {
+        "Name": "фантастика"
+      },
+      {
+        "Name": "боевик"
+      },
+      {
+        "Name": "фэнтези"
+      },
+      {
+        "Name": "приключения"
+      }
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
+  },
+  {
+    "Runame": "Мстители",
+    "EnName": "Avengers",
+    "MovieType": "movie",
+    "MovieYear": 2012,
+    "Genres": [
+      {
+        "Name": "фантастика"
+      },
+      {
+        "Name": "боевик"
+      },
+      {
+        "Name": "фэнтези"
+      },
+      {
+        "Name": "приключения"
+      }
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
+  },
+  {
+    "Runame": "Мстители",
+    "EnName": "Avengers",
+    "MovieType": "movie",
+    "MovieYear": 2012,
+    "Genres": [
+      {
+        "Name": "фантастика"
+      },
+      {
+        "Name": "боевик"
+      },
+      {
+        "Name": "фэнтези"
+      },
+      {
+        "Name": "приключения"
+      }
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
+  },
+  {
+    "Runame": "Мстители",
+    "EnName": "Avengers",
+    "MovieType": "movie",
+    "MovieYear": 2012,
+    "Genres": [
+      {
+        "Name": "фантастика"
+      },
+      {
+        "Name": "боевик"
+      },
+      {
+        "Name": "фэнтези"
+      },
+      {
+        "Name": "приключения"
+      }
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
+  },
+  {
+    "Runame": "Мстители",
+    "EnName": "Avengers",
+    "MovieType": "movie",
+    "MovieYear": 2012,
+    "Genres": [
+      {
+        "Name": "фантастика"
+      },
+      {
+        "Name": "боевик"
+      },
+      {
+        "Name": "фэнтези"
+      },
+      {
+        "Name": "приключения"
+      }
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
+  },
+  {
+    "Runame": "Мстители",
+    "EnName": "Avengers",
+    "MovieType": "movie",
+    "MovieYear": 2012,
+    "Genres": [
+      {
+        "Name": "фантастика"
+      },
+      {
+        "Name": "боевик"
+      },
+      {
+        "Name": "фэнтези"
+      },
+      {
+        "Name": "приключения"
+      }
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
+  },
+  {
+    "Runame": "Мстители",
+    "EnName": "Avengers",
+    "MovieType": "movie",
+    "MovieYear": 2012,
+    "Genres": [
+      {
+        "Name": "фантастика"
+      },
+      {
+        "Name": "боевик"
+      },
+      {
+        "Name": "фэнтези"
+      },
+      {
+        "Name": "приключения"
+      }
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
+  },
+  {
+    "Runame": "Мстители",
+    "EnName": "Avengers",
+    "MovieType": "movie",
+    "MovieYear": 2012,
+    "Genres": [
+      {
+        "Name": "фантастика"
+      },
+      {
+        "Name": "боевик"
+      },
+      {
+        "Name": "фэнтези"
+      },
+      {
+        "Name": "приключения"
+      }
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
+  },
+  {
+    "Runame": "Мстители",
+    "EnName": "Avengers",
+    "MovieType": "movie",
+    "MovieYear": 2012,
+    "Genres": [
+      {
+        "Name": "фантастика"
+      },
+      {
+        "Name": "боевик"
+      },
+      {
+        "Name": "фэнтези"
+      },
+      {
+        "Name": "приключения"
+      }
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
+  },
+  {
+    "Runame": "Мстители",
+    "EnName": "Avengers",
+    "MovieType": "movie",
+    "MovieYear": 2012,
+    "Genres": [
+      {
+        "Name": "фантастика"
+      },
+      {
+        "Name": "боевик"
+      },
+      {
+        "Name": "фэнтези"
+      },
+      {
+        "Name": "приключения"
+      }
+    ],
+    "ExternalId": {
+      "TMDB": "24428",
+      "KPHD": "263531"
+    },
+    "Source": {
+      "TMDB": false,
+      "KPHD": false
+    }
   }
 ]
