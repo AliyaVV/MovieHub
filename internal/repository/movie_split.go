@@ -111,7 +111,6 @@ func (mvsh *MovieShort) UpdateMovie(id string, req dto.AddMovieRequest) error {
 
 	fmt.Println("не найден по ид")
 	return errors.New("movie is not found")
-
 }
 
 func (mvsh *MovieShort) DeleteMovieById(id string) error {

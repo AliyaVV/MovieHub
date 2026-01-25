@@ -6,5 +6,5 @@ import (
 
 func TestLoadFile(t *testing.T) {
 
-	LoadFromFile("E:\\Aliya\\MovieHub\\longSlice.json", "long")
+	//LoadFromFile("E:\\Aliya\\MovieHub\\longSlice.json", "long")
 }
