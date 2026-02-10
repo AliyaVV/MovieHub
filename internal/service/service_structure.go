@@ -1,5 +1,7 @@
 package service
 
+//Тут чисто для ДЗ, не используется в проекте
+
 import (
 	"context"
 	"fmt"

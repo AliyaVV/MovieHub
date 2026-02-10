@@ -1,5 +1,7 @@
 package repository
 
+//Тут чисто для ДЗ, не используется в проекте
+
 import (
 	"encoding/json"
 	"fmt"

@@ -1,21 +1,14 @@
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	"os/signal"
-	"sync"
-	"syscall"
-
-	"github.com/AliyaVV/MovieHub/internal/http/handler"
-	"github.com/AliyaVV/MovieHub/internal/repository"
+	"github.com/AliyaVV/MovieHub/internal/external/kinopoiskclient"
+	"github.com/AliyaVV/MovieHub/internal/handler/kphandler"
+	"github.com/AliyaVV/MovieHub/internal/http/router"
 	"github.com/AliyaVV/MovieHub/internal/service"
-	"github.com/gin-gonic/gin"
 )
 
-func main() {
-
+/*
+func old_dz_main{
 	repository.LoadFromFile("D:\\Projects\\MovieHub\\shortSlice.json", "short")
 	repository.LoadFromFile("D:\\Projects\\MovieHub\\longSlice.json", "long")
 
@@ -45,5 +38,22 @@ func main() {
 	close(repository.Ch)
 
 	wg.Wait()
+}*/
+
+func main() {
+	//ctx := context.Background()
+	cfg := kinopoiskclient.Config{
+		BaseURL: "https://api.poiskkino.dev/v1.4/movie",
+		APIKey:  "APDGYB9-VV5MWKH-K3EZDXM-SQG2YYN",
+	}
+	kpClient := kinopoiskclient.NewHTTPClient(cfg)
+	movieService := &service.MovieService{
+		KPInterface: kpClient,
+	}
+	movieHandler := kphandler.NewMovieHandler(movieService)
+
+	r := router.SetupRouter(movieHandler)
+
+	r.Run(":8080")
 
 }

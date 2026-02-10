@@ -10,6 +10,8 @@ import (
 	"github.com/AliyaVV/MovieHub/internal/repository"
 )
 
+//Тут чисто для ДЗ, не используется в проекте
+
 func Log_slice(wg *sync.WaitGroup, ctx context.Context) {
 	ticker := time.NewTicker(200 * time.Millisecond)
 	defer ticker.Stop()

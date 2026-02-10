@@ -1,5 +1,6 @@
 package handler
 
+//Тут чисто для ДЗ, не используется в проекте
 import (
 	"fmt"
 	"net/http"

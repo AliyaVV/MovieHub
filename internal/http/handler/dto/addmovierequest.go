@@ -1,5 +1,7 @@
 package dto
 
+//Тут чисто для ДЗ, не используется в проекте
+
 type AddMovieRequest struct {
 	ID          string `json:"id" binding:"required"`
 	Name        string `json:"name" binding:"required"`
