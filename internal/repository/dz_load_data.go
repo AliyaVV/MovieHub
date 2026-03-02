@@ -2,12 +2,7 @@ package repository
 
 //Тут чисто для ДЗ, не используется в проекте
 
-import (
-	"encoding/json"
-	"fmt"
-	"os"
-)
-
+/*
 func LoadFromFile(filename string, typeslice string) error {
 	//data := make([]byte, 1024) //не поняла,как определять длину слайса
 	//	_, errRead := io.ReadFull(file, data) // как использовать, если всегда EOF
@@ -46,3 +41,4 @@ func LoadFromFile(filename string, typeslice string) error {
 	return nil
 
 }
+*/

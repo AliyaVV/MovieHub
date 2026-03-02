@@ -2,6 +2,7 @@ package kpmapper
 
 type Movie_Entity struct {
 	ID          int
+	IDTmdb      int
 	Name        string
 	MovieType   string
 	Year        int
@@ -14,13 +15,14 @@ type Movie_Entity struct {
 	Slogan      string
 	Cast        []Actors
 	SeasonsInfo []Seasons
+	Countries   []string
 }
 
 type KPRatings struct {
-	KP                 float32
-	Imdb               float32
-	FilmCritics        float32
-	RussianFilmCritics float32
+	KP                 float64
+	Imdb               float64
+	FilmCritics        float64
+	RussianFilmCritics float64
 }
 
 type Vote struct {

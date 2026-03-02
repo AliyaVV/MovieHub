@@ -2,16 +2,7 @@ package service
 
 //Тут чисто для ДЗ, не используется в проекте
 
-import (
-	"context"
-	"fmt"
-	"sync"
-	"time"
-
-	"github.com/AliyaVV/MovieHub/internal/model"
-	"github.com/AliyaVV/MovieHub/internal/repository"
-)
-
+/*
 func Structure_Create(wg *sync.WaitGroup, ctx context.Context) {
 	defer wg.Done()
 	ticker := time.NewTicker(200 * time.Millisecond)
@@ -52,8 +43,8 @@ func Structure_Create(wg *sync.WaitGroup, ctx context.Context) {
 		}
 		ex_structure := model.Movie_ex{
 			Movie_short: short_structure,
-			Description: `Локи возвращается, и в этот раз он не один. Земля оказывается на грани порабощения, 
-		и только лучшие из лучших могут спасти человечество. Глава международной организации Щ. И. Т. Ник Фьюри 
+			Description: `Локи возвращается, и в этот раз он не один. Земля оказывается на грани порабощения,
+		и только лучшие из лучших могут спасти человечество. Глава международной организации Щ. И. Т. Ник Фьюри
 		собирает выдающихся защитников справедливости и добра`,
 			Country: "USA",
 		}
@@ -69,3 +60,4 @@ func Structure_Create(wg *sync.WaitGroup, ctx context.Context) {
 	//repository.Movie_Split(ex_structure)
 
 }
+*/

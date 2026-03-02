@@ -1,10 +1,14 @@
 package main
 
 import (
+	"github.com/AliyaVV/MovieHub/configs"
 	"github.com/AliyaVV/MovieHub/internal/external/kinopoiskclient"
-	"github.com/AliyaVV/MovieHub/internal/handler/kphandler"
+	"github.com/AliyaVV/MovieHub/internal/external/tmdbclient"
+	"github.com/AliyaVV/MovieHub/internal/handler"
 	"github.com/AliyaVV/MovieHub/internal/http/router"
 	"github.com/AliyaVV/MovieHub/internal/service"
+	"github.com/AliyaVV/MovieHub/storage/mongo"
+	"github.com/AliyaVV/MovieHub/storage/redis"
 )
 
 /*
@@ -42,15 +46,31 @@ func old_dz_main{
 
 func main() {
 	//ctx := context.Background()
-	cfg := kinopoiskclient.Config{
+	mongoClient, _ := mongo.InitMongo()
+	mongoDB := mongoClient.Database("movies_db")
+
+	redisClient := redis.InitRedis()
+
+	movieRepo := mongo.NewMongoMovieRepository(mongoDB)
+	logger := redis.NewRedisSearchLogger(redisClient)
+
+	cfg_kp := configs.Config{
 		BaseURL: "https://api.poiskkino.dev/v1.4/movie",
-		APIKey:  "APDGYB9-VV5MWKH-K3EZDXM-SQG2YYN",
+		Token:   "APDGYB9-VV5MWKH-K3EZDXM-SQG2YYN",
 	}
-	kpClient := kinopoiskclient.NewHTTPClient(cfg)
+	cfg_tmdb := configs.Config{
+		BaseURL: "https://api.themoviedb.org/3",
+		Token:   `eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYjNlYTcxMjc4NDVkNDgyY2NhODQxZjU0MjIzNGUxNiIsIm5iZiI6MTc2MjU5OTgwMC43MjIsInN1YiI6IjY5MGYyMzc4ZjFhYWYyZGViMmNlN2ZjMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2q38BKb0DVFpMLyUVtTKPDSmplNLVmne0Pi1kPrl-Kg`,
+	}
+	kpClient := kinopoiskclient.NewHTTPClient(cfg_kp)
+	tmdbClient := tmdbclient.NewHTTPClient(cfg_tmdb)
 	movieService := &service.MovieService{
-		KPInterface: kpClient,
+		KPInterface:   kpClient,
+		TMDBInterface: tmdbClient,
+		MovieRepo:     movieRepo,
+		Logger:        logger,
 	}
-	movieHandler := kphandler.NewMovieHandler(movieService)
+	movieHandler := handler.NewMovieHandler(movieService)
 
 	r := router.SetupRouter(movieHandler)
 

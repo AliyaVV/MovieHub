@@ -6,27 +6,33 @@ type Movie_ex struct {
 	Description string
 	Top250      int
 	Ratings
-	Genres   []MovieGenres
-	Country  string
-	Released string
-	Poster   string
-	Director []string
-	Writer   []string
-	Actors   []string
-	Awards   []string
-	budget   int
+	Country []string
+	Poster  string
+	Cast    []Cast
+	Awards  []string
+	Budget  int
+	Revenue int
+	Seasons []Seasons
+	Source  Source
 }
 type MovieGenres struct {
 	Name string
 }
 type Ratings struct {
-	KP                 float32
-	TMDB               float32
-	FilmCritic         float32
-	filmCritics        float32
-	russianFilmCritics float32
+	KP                 float64
+	TMDB               float64
+	FilmCritic         float64
+	RussianFilmCritics float64
 }
 
-func (m Movie_ex) GetKPId() string {
-	return m.Movie_short.ExternalId.KPHD
+type Cast struct {
+	Name        string
+	EnName      string
+	Profession  string
+	Description string
+}
+
+type Seasons struct {
+	Number        int
+	EpisodesCount int
 }

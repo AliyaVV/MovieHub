@@ -1,4 +1,4 @@
-package kphandler
+package handler
 
 import (
 	"net/http"

@@ -14,7 +14,6 @@ var strSearch = TMDBSearchTitle{
 			because of racial lines.`,
 	Movie_year: "2011-08-09",
 	Rating:     8.204,
-	Genre:      []int{18},
 }
 
 func (*MovieStubTMDB) TMDBSearchTitle(title string) (*RespTMDBSearchTitle, error) {
@@ -26,6 +25,7 @@ func (*MovieStubTMDB) TMDBSearchTitle(title string) (*RespTMDBSearchTitle, error
 	}, nil
 }
 
+/*
 func (*MovieStubTMDB) TMDBSearchId(id int) (*RespTMDBMovieDetail, error) {
 	return &RespTMDBMovieDetail{
 		TMDBSearchTitle: strSearch,
@@ -42,3 +42,4 @@ func (*MovieStubTMDB) TMDBSearchId(id int) (*RespTMDBMovieDetail, error) {
 		DescShort: "Change begins with a whisper",
 	}, nil
 }
+*/

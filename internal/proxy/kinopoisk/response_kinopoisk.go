@@ -8,25 +8,27 @@ type RespKPSearchTitle struct {
 }
 
 type KPSearchTitle struct {
-	ID          int     `json:"id"`
-	Name        string  `json:"name"`
-	MovieType   string  `json:"type"`
-	Year        int     `json:"year"`
-	Description string  `json:"description"`
-	Genres      []Genre `json:"genres"`
-	Ratings     Rating  `json:"rating"`
-	Top250      int     `json:"top250"` //только в этом ответе
-	Top10       int     `json:"top10"`  //только в этом ответе
-	Votes       Vote    `json:"Votes"`
+	ID          int        `json:"id"`
+	Name        string     `json:"name"`
+	EnName      string     `json:"alternativeName"`
+	MovieType   string     `json:"type"`
+	Year        int        `json:"year"`
+	Description string     `json:"description"`
+	Genres      []Genre    `json:"genres"`
+	Ratings     Rating     `json:"rating"`
+	Top250      int        `json:"top250"` //только в этом ответе
+	Top10       int        `json:"top10"`  //только в этом ответе
+	Votes       Vote       `json:"Votes"`
+	ExternalId  ExternalId `json:"externalId"`
 }
 type Genre struct {
 	Name string `json:"name"`
 }
 type Rating struct {
-	KP                 float32 `json:"kp"`
-	Imdb               float32 `json:"imdb"`
-	FilmCritics        float32 `json:"filmCritics"`
-	RussianFilmCritics float32 `json:"russianFilmCritics"`
+	KP                 float64 `json:"kp"`
+	Imdb               float64 `json:"imdb"`
+	FilmCritics        float64 `json:"filmCritics"`
+	RussianFilmCritics float64 `json:"russianFilmCritics"`
 }
 
 type Vote struct {
@@ -38,17 +40,27 @@ type Vote struct {
 
 // get https://api.poiskkino.dev/v1.4/movie/263531
 type RespKPSearchID struct {
-	ID          int       `json:"id"`
-	Name        string    `json:"name"`
-	MovieType   string    `json:"type"`
-	Year        int       `json:"year"`
-	Description string    `json:"description"`
-	Ratings     Rating    `json:"rating"`
-	Slogan      string    `json:"slogan"`
-	Cast        []Actors  `json:"persons"`
-	SeasonsInfo []Seasons `json:"seasonsInfo"`
-	Genres      []Genre   `json:"genres"`
-	Votes       Vote      `json:"Votes"`
+	ID          int         `json:"id"`
+	Name        string      `json:"name"`
+	MovieType   string      `json:"type"`
+	Year        int         `json:"year"`
+	Description string      `json:"description"`
+	Ratings     Rating      `json:"rating"`
+	Slogan      string      `json:"slogan"`
+	Cast        []Actors    `json:"persons"`
+	SeasonsInfo []Seasons   `json:"seasonsInfo"`
+	Genres      []Genre     `json:"genres"`
+	Votes       Vote        `json:"votes"`
+	Countries   []Countries `json:"countries"`
+	ExternalId  ExternalId  `json:"externalId"`
+}
+
+type ExternalId struct {
+	TMDB int
+}
+
+type Countries struct {
+	Name string
 }
 type Actors struct {
 	Name        string `json:"name"`
