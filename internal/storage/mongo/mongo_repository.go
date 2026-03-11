@@ -1,21 +1,14 @@
 package mongo
 
 import (
-	"context"
-	"errors"
-	"fmt"
-
-	"github.com/AliyaVV/MovieHub/internal/model"
-	"github.com/AliyaVV/MovieHub/internal/repository"
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type MongoMovieRepository struct {
 	collection *mongo.Collection
 }
 
+/*
 func NewMongoMovieRepository(db *mongo.Database) repository.MovieRepository {
 	return &MongoMovieRepository{
 		collection: db.Collection("movies"),
@@ -62,3 +55,28 @@ func InitMongo() (*mongo.Client, error) {
 	}
 	return client, nil
 }
+
+func (r *MongoMovieRepository) GetAll(ctx context.Context) ([]*model.Movie_short, error) {
+	cursor, err := r.collection.Find(ctx, bson.M{})
+	if err != nil {
+		return nil, err
+	}
+	defer cursor.Close(ctx)
+
+	var movies []*model.Movie_short
+	for cursor.Next(ctx) {
+		var movie model.Movie_short
+		if err := cursor.Decode(&movie); err != nil {
+			return nil, err
+		}
+		movies = append(movies, &movie)
+	}
+
+	return movies, nil
+}
+
+func (r *MongoMovieRepository) Create(ctx context.Context, movie *model.Movie_short) error {
+	_, err := r.collection.InsertOne(ctx, movie)
+	return err
+}
+*/

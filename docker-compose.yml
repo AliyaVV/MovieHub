@@ -8,19 +8,19 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password-01
-      POSTGRES_DB: database
+      POSTGRES_DB: movie_db
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-  mongodb:
-    image: mongo:7
-    container_name: mongodb
-    restart: always
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
+  #mongodb:
+  #  image: mongo:7
+  #  container_name: mongodb
+  #  restart: always
+  # ports:
+  #    - "27017:27017"
+  #  volumes:
+  #    - mongo_data:/data/db
     #  - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
       
 
@@ -33,4 +33,4 @@ services:
 
 volumes:
   postgres_data:
-  mongo_data:
+  #mongo_data:

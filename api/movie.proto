@@ -2,29 +2,45 @@ syntax = "proto3";
 
 package movie;
 
-option go_package = "github.com/AliyaVV/MovieHub/internal/grpc/moviepb;moviepb";
+option go_package = "github.com/AliyaVV/MovieHub/grpc/pb";
 
 service MovieService {
-  rpc GetMovieById (GetMovieByIdRequest) returns (Movie);
-  rpc SearchMovieByTitle (SearchMovieByTitleRequest) returns (MovieList);
+  rpc CreateMovie (CreateMovieRequest) returns (MovieShortResponse);
+  rpc GetMovieById (GetMovieByIdRequest) returns (MovieExResponse);
+  rpc GetMovies (Empty) returns (MovieShortListResponse);
+}
+
+message Empty {}
+
+message MovieShort {
+  int32 id = 1;
+  string runame = 2;
+  string enname = 3;
+  string movietype = 4;
+  int32 movieyear = 5;
+}
+
+message MovieEx {
+  int32 id = 1;
+  string description = 2;
+  string poster = 3;
+}
+
+message CreateMovieRequest {
+  MovieShort movie = 1;
 }
 
 message GetMovieByIdRequest {
   int32 id = 1;
 }
 
-message SearchMovieByTitleRequest {
-  string query = 1;
+message MovieExResponse {
+  MovieEx movie=1;
 }
 
-message MovieList {
-  repeated Movie movies = 1;
+message MovieShortResponse{
+  MovieShort movie = 1;
 }
-
-message Movie {
-  int32 id = 1;
-  string name = 2;
-  string movie_type = 3;
-  int32 year = 4;
-  repeated string genres = 5;
+message MovieShortListResponse{
+  repeated MovieShort movies = 1;
 }
