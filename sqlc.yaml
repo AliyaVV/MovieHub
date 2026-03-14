@@ -1,0 +1,10 @@
+version: "2"
+sql:
+  - engine: postgresql
+    schema: "internal/storage/postgre/migrations"
+    queries: "internal/storage/postgre/sqlc/queries"
+    gen:
+      go:
+        package: "repository"
+        out: "internal/storage/postgre/sqlc"
+        emit_json_tags: true

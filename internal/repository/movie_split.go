@@ -1,14 +1,10 @@
 package repository
 
 //Тут чисто для ДЗ, не используется в проекте
-
+/*
 import (
-	"context"
-	"errors"
 	"log"
 	"os"
-
-	"fmt"
 
 	"encoding/json"
 	"sync"
@@ -82,6 +78,7 @@ type MovieRepository interface {
 	UpdateMovie(string, dto.AddMovieRequest) error
 	DeleteMovieById(string) error
 }
+
 
 // получение фильма по ид из слайса короткой инф о фильме
 func (mvsh MovieShort) GetMovieById(id string) (model.Movie_short, bool) {
@@ -186,3 +183,4 @@ func Movie_Split(wg *sync.WaitGroup, ctx context.Context) {
 	}
 
 }
+*/

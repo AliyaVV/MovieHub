@@ -43,21 +43,18 @@ func TestMapKPTitleToEntity(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := kpmapper.MapKPTitleToEntity(tt.respTitle)
-			if got.ID != tt.wantId {
-				t.Errorf("ID = %d, want %d", got.ID, tt.wantId)
+			got, _ := kpmapper.MapKPTitleToEntity(tt.respTitle)
+			if got.Id != tt.wantId {
+				t.Errorf("ID = %d, want %d", got.Id, tt.wantId)
 			}
-			if got.Name != tt.name {
-				t.Errorf("name = %s, want %s", got.Name, tt.name)
+			if got.Runame != tt.name {
+				t.Errorf("name = %s, want %s", got.Runame, tt.name)
 			}
 			if got.MovieType != tt.wantMovieType {
 				t.Errorf("MovieType = %s, want %s", got.MovieType, tt.wantMovieType)
 			}
-			if got.Year != tt.wantYear {
-				t.Errorf("year = %d, want %d", got.Year, tt.wantYear)
-			}
-			if got.Top250 != tt.wantTop250 {
-				t.Errorf("top250 = %d, want %d", got.Top250, tt.wantTop250)
+			if got.MovieYear != tt.wantYear {
+				t.Errorf("year = %d, want %d", got.MovieYear, tt.wantYear)
 			}
 
 			// if true {

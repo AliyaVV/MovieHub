@@ -9,7 +9,9 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/AliyaVV/MovieHub/configs"
 	"github.com/AliyaVV/MovieHub/internal/mapper/kpmapper"
+	"github.com/AliyaVV/MovieHub/internal/model"
 	"github.com/AliyaVV/MovieHub/internal/proxy/kinopoisk"
 )
 
@@ -17,27 +19,27 @@ import (
 type client struct {
 	httpClient *http.Client
 	baseURL    string
-	apiKey     string
+	token      string
 }
 
-func NewHTTPClient(cfg Config) KPClient {
+func NewHTTPClient(cfg configs.Config) KPClient {
 	return &client{
 		httpClient: &http.Client{
 			Timeout: 30 * time.Second,
 		},
 		baseURL: cfg.BaseURL,
-		apiKey:  cfg.APIKey,
+		token:   cfg.Token,
 	}
 }
 
 // поиск в кинопоиске по названию фильма
-func (cl *client) SearchByTitle(ctx context.Context, title string) ([]*kpmapper.Movie_Entity, error) {
+func (cl *client) SearchByTitle(ctx context.Context, title string) ([]*model.Movie_short, error) {
 	url := fmt.Sprintf("%s/search?query=%s", cl.baseURL, url.QueryEscape(title))
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("X-API-KEY", cl.apiKey)
+	req.Header.Set("X-API-KEY", cl.token)
 
 	resp, err := cl.httpClient.Do(req)
 	if err != nil {
@@ -50,9 +52,12 @@ func (cl *client) SearchByTitle(ctx context.Context, title string) ([]*kpmapper.
 		return nil, err
 	}
 
-	var movies []*kpmapper.Movie_Entity
+	var movies []*model.Movie_short
 	for _, doc := range kpResp.Docs {
-		movie := kpmapper.MapKPTitleToEntity(doc)
+		movie, err := kpmapper.MapKPTitleToEntity(doc)
+		if err != nil {
+			continue
+		}
 		movies = append(movies, movie)
 	}
 	return movies, nil
@@ -65,7 +70,7 @@ func (cl *client) GetByID(ctx context.Context, id int) (kinopoisk.RespKPSearchID
 	if err != nil {
 		return kinopoisk.RespKPSearchID{}, err
 	}
-	req.Header.Set("X-API-KEY", cl.apiKey)
+	req.Header.Set("X-API-KEY", cl.token)
 	resp, err := cl.httpClient.Do(req)
 	if err != nil {
 		return kinopoisk.RespKPSearchID{}, err

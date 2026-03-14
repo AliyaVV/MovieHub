@@ -1,16 +1,8 @@
 package handler
 
 //Тут чисто для ДЗ, не используется в проекте
-import (
-	"fmt"
-	"net/http"
 
-	"github.com/AliyaVV/MovieHub/internal/http/handler/dto"
-	"github.com/AliyaVV/MovieHub/internal/model"
-	"github.com/AliyaVV/MovieHub/internal/repository"
-	"github.com/gin-gonic/gin"
-)
-
+/*
 type Handler struct {
 	repo repository.MovieRepository
 }
@@ -48,6 +40,7 @@ func (h *Handler) GetMovie(c *gin.Context) {
 }
 
 // добавление фильма в слайс и файл
+/*
 func (h *Handler) AddMovieShort(c *gin.Context) {
 	var req dto.AddMovieRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -96,3 +89,4 @@ func (h *Handler) DeleteMovie(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "movie is deleted"})
 }
+*/

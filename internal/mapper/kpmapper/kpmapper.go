@@ -3,38 +3,33 @@ package kpmapper
 import (
 	"errors"
 
+	"github.com/AliyaVV/MovieHub/internal/model"
 	"github.com/AliyaVV/MovieHub/internal/proxy/kinopoisk"
 )
 
-func MapKPTitleToEntity(respTitle kinopoisk.KPSearchTitle) *Movie_Entity {
+func MapKPTitleToEntity(respTitle kinopoisk.KPSearchTitle) (*model.Movie_short, error) {
 	genres := make([]string, 0, len(respTitle.Genres))
 	for _, val := range respTitle.Genres {
 		if val.Name != "" {
 			genres = append(genres, val.Name)
 		}
 	}
-	return &Movie_Entity{
-		ID:          respTitle.ID,
-		Name:        respTitle.Name,
-		MovieType:   respTitle.MovieType,
-		Year:        respTitle.Year,
-		Description: respTitle.Description,
-		Genres:      genres,
-		Ratings: KPRatings{
+	return &model.Movie_short{
+		Id:        respTitle.ID,
+		Runame:    respTitle.Name,
+		EnName:    respTitle.EnName,
+		MovieType: respTitle.MovieType,
+		MovieYear: respTitle.Year,
+		Genres:    genres,
+		Ratings: model.Ratings{
 			KP:                 respTitle.Ratings.KP,
-			Imdb:               respTitle.Ratings.Imdb,
-			FilmCritics:        respTitle.Ratings.FilmCritics,
+			FilmCritic:         respTitle.Ratings.FilmCritics,
 			RussianFilmCritics: respTitle.Ratings.RussianFilmCritics,
 		},
-		Top250: respTitle.Top250,
-		Top10:  respTitle.Top10,
-		Votes: Vote{
-			KP:                 respTitle.Votes.KP,
-			Imdb:               respTitle.Votes.Imdb,
-			FilmCritics:        respTitle.Votes.FilmCritics,
-			RussianFilmCritics: respTitle.Votes.RussianFilmCritics,
+		ExternalId: model.ExternalId{
+			TMDB: respTitle.ExternalId.TMDB,
 		},
-	}
+	}, nil
 }
 
 // расширение данных о фильме данными ответа по ид
@@ -55,7 +50,7 @@ func MapKPDetailToEntity(movie *Movie_Entity, resp kinopoisk.RespKPSearchID) err
 			Description: valc.Description,
 		})
 	}
-	movie.Cast = append(movie.Cast, cast...)
+	movie.Cast = cast
 
 	seasons := make([]Seasons, 0, len(resp.SeasonsInfo))
 	for _, vals := range resp.SeasonsInfo {
@@ -64,19 +59,29 @@ func MapKPDetailToEntity(movie *Movie_Entity, resp kinopoisk.RespKPSearchID) err
 			EpisodesCount: vals.EpisodesCount,
 		})
 	}
-	movie.SeasonsInfo = append(movie.SeasonsInfo, seasons...)
+	movie.SeasonsInfo = seasons
 
 	return nil
 }
 
 // маппинг ответа по ид к промежуточной структуре
-func GetBaseMovie(resp kinopoisk.RespKPSearchID) *Movie_Entity {
+func GetBaseMovie(resp kinopoisk.RespKPSearchID) (*Movie_Entity, error) {
+	if resp.ID == 0 {
+		return nil, errors.New("empty kinopoisk_id response")
+	}
 	genres := make([]string, 0, len(resp.Genres))
 	for _, val := range resp.Genres {
 		if val.Name != "" {
 			genres = append(genres, val.Name)
 		}
 	}
+	countries := make([]string, 0, len(resp.Countries))
+	for _, val := range resp.Countries {
+		if val.Name != "" {
+			countries = append(countries, val.Name)
+		}
+	}
+
 	return &Movie_Entity{
 		ID:          resp.ID,
 		Name:        resp.Name,
@@ -90,11 +95,13 @@ func GetBaseMovie(resp kinopoisk.RespKPSearchID) *Movie_Entity {
 			FilmCritics:        resp.Ratings.FilmCritics,
 			RussianFilmCritics: resp.Ratings.RussianFilmCritics,
 		},
+		Countries: countries,
 		Votes: Vote{
 			KP:                 resp.Votes.KP,
 			Imdb:               resp.Votes.Imdb,
 			FilmCritics:        resp.Votes.FilmCritics,
 			RussianFilmCritics: resp.Votes.RussianFilmCritics,
 		},
-	}
+		IDTmdb: resp.ExternalId.TMDB,
+	}, nil
 }
