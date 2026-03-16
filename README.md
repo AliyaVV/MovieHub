@@ -77,6 +77,7 @@ movie_genres.movie_id → movies.id
 movie_genres.genre_id → genres.id
 
 casts.movie_id → movies.id
+
 ```sql
 
 ## 📚 Документация
