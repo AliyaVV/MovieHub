@@ -55,8 +55,6 @@ func (mv *MovieRepo) SaveMovie(ctx context.Context, movie *model.Movie_ex) (int3
 	q := repository.New(trx)
 
 	defer trx.Rollback()
-	fmt.Println("kp_id", movie.Id)
-	fmt.Println("TMDB", movie.ExternalId.TMDB)
 
 	movieID, err := q.SaveMovie(ctx, repository.SaveMovieParams{
 		RuName:      NullToString(movie.Runame),
@@ -74,9 +72,6 @@ func (mv *MovieRepo) SaveMovie(ctx context.Context, movie *model.Movie_ex) (int3
 		fmt.Println("err1", err)
 		return 0, err
 	}
-	fmt.Println("TMDB rating", movie.Movie_short.Ratings.TMDB)
-	fmt.Println("KP rating", movie.Movie_short.Ratings.KP)
-	fmt.Println("FilmCritic rating", movie.Movie_short.Ratings.FilmCritic)
 
 	err = q.SaveRating(ctx, repository.SaveRatingParams{
 		MovieID:            NullToInt32(movieID),
@@ -210,9 +205,7 @@ func (mv *MovieRepo) GetListMovies(ctx context.Context) ([]model.Movie_short, er
 		if err != nil {
 			fmt.Println("GetListMovies:error get genres:", basic.ID, err)
 		}
-		fmt.Println("genres ", genres)
 		genres_list := ConvertGenres(genres)
-		fmt.Println("genres ", genres_list)
 		movieShort := model.Movie_short{
 			Id:        int(basic.KpID.Int32),
 			Runame:    basic.RuName.String,
@@ -233,23 +226,4 @@ func (mv *MovieRepo) GetListMovies(ctx context.Context) ([]model.Movie_short, er
 	}
 
 	return movies, nil
-}
-
-// Добавь этот метод для тестирования
-func (mv *MovieRepo) TestDirectInsert(ctx context.Context) error {
-	// Прямой INSERT без транзакции
-	q := repository.New(mv.mvdb)
-
-	id, err := q.SaveMovie(ctx, repository.SaveMovieParams{
-		RuName: NullToString("Тестовый фильм"),
-		EnName: NullToString("Test Movie"),
-		Year:   NullToInt32(2026),
-	})
-
-	if err != nil {
-		return fmt.Errorf("direct insert failed: %w", err)
-	}
-
-	fmt.Printf("Direct insert successful, got ID: %d\n", id)
-	return nil
 }
