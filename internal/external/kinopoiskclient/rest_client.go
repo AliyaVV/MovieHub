@@ -46,6 +46,14 @@ func (cl *client) SearchByTitle(ctx context.Context, title string) ([]*model.Mov
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(resp.Body)
+		return nil, fmt.Errorf(
+			"kinopoisk search failed: status=%d body=%s",
+			resp.StatusCode,
+			string(body),
+		)
+	}
 
 	var kpResp kinopoisk.RespKPSearchTitle
 	if err := json.NewDecoder(resp.Body).Decode(&kpResp); err != nil {

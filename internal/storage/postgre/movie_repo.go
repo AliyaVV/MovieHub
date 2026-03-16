@@ -74,13 +74,16 @@ func (mv *MovieRepo) SaveMovie(ctx context.Context, movie *model.Movie_ex) (int3
 		fmt.Println("err1", err)
 		return 0, err
 	}
+	fmt.Println("TMDB rating", movie.Movie_short.Ratings.TMDB)
+	fmt.Println("KP rating", movie.Movie_short.Ratings.KP)
+	fmt.Println("FilmCritic rating", movie.Movie_short.Ratings.FilmCritic)
 
 	err = q.SaveRating(ctx, repository.SaveRatingParams{
 		MovieID:            NullToInt32(movieID),
-		Kp:                 NullToFloat64(movie.Ratings.KP),
-		Tmdb:               NullToFloat64(movie.Ratings.TMDB),
-		FilmCritic:         NullToFloat64(movie.FilmCritic),
-		RussianFilmCritics: NullToFloat64(movie.RussianFilmCritics),
+		Kp:                 NullToFloat64(movie.Movie_short.Ratings.KP),
+		Tmdb:               NullToFloat64(movie.Movie_short.Ratings.TMDB),
+		FilmCritic:         NullToFloat64(movie.Movie_short.Ratings.FilmCritic),
+		RussianFilmCritics: NullToFloat64(movie.Movie_short.Ratings.RussianFilmCritics),
 	})
 	if err != nil {
 		return 0, err

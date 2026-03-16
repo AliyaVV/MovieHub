@@ -81,7 +81,6 @@ func GetBaseMovie(resp kinopoisk.RespKPSearchID) (*Movie_Entity, error) {
 			countries = append(countries, val.Name)
 		}
 	}
-
 	return &Movie_Entity{
 		ID:          resp.ID,
 		Name:        resp.Name,
@@ -91,7 +90,6 @@ func GetBaseMovie(resp kinopoisk.RespKPSearchID) (*Movie_Entity, error) {
 		Genres:      genres,
 		Ratings: KPRatings{
 			KP:                 resp.Ratings.KP,
-			Imdb:               resp.Ratings.Imdb,
 			FilmCritics:        resp.Ratings.FilmCritics,
 			RussianFilmCritics: resp.Ratings.RussianFilmCritics,
 		},
