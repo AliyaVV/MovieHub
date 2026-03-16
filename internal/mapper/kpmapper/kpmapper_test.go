@@ -56,10 +56,6 @@ func TestMapKPTitleToEntity(t *testing.T) {
 			if got.MovieYear != tt.wantYear {
 				t.Errorf("year = %d, want %d", got.MovieYear, tt.wantYear)
 			}
-
-			// if true {
-			// 	t.Errorf("MapKPTitleToEntity() = %v, want %v", got, tt.want)
-			// }
 		})
 	}
 }

@@ -50,7 +50,8 @@ func (ms *MovieService) GetMovieById(ctx context.Context, id int) (*model.Movie_
 		fmt.Println("Аггрегируем1")
 		movie, err = agg_movie_ex(movie_base, nil)
 		if err != nil {
-			fmt.Println("error aggregate: ", err)
+			fmt.Println("Aggregate error: ", err)
+			return nil, err
 		}
 		_, err = ms.MovieRepo.SaveMovie(ctx, movie)
 		if err != nil {
@@ -63,7 +64,7 @@ func (ms *MovieService) GetMovieById(ctx context.Context, id int) (*model.Movie_
 		if err != nil {
 			movie, err = agg_movie_ex(movie_base, nil)
 			if err != nil {
-				fmt.Println("Service GetMovieById:", err)
+				fmt.Println("Aggregate error:", err)
 			}
 			_, err = ms.MovieRepo.SaveMovie(ctx, movie)
 			if err != nil {

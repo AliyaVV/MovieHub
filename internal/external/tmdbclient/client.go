@@ -74,18 +74,15 @@ func (cl *client) GetByID(ctx context.Context, id int) (*tmdbmapper.Tmdb_movie_m
 	fmt.Println("url", url)
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
-		fmt.Println("GetByID err1", err)
 		return nil, err
 	}
 	req.Header.Set("Authorization", "Bearer "+cl.token)
 	req.Header.Set("Content-Type", "application/json")
 	resp, err := cl.httpClient.Do(req)
 	if err != nil {
-		fmt.Println("GetByID err2", err)
 		return nil, err
 	}
 	defer resp.Body.Close()
-	fmt.Println("запрос tmdb, код ответа:", resp.StatusCode)
 	if resp.StatusCode != http.StatusOK {
 		body, _ := io.ReadAll(resp.Body)
 		return nil, fmt.Errorf(
@@ -103,33 +100,3 @@ func (cl *client) GetByID(ctx context.Context, id int) (*tmdbmapper.Tmdb_movie_m
 	return movie, nil
 
 }
-
-/*Не нужно
-func (cl *client) GetCast(ctx context.Context, id int) (tmdb.RespTMDBActors, error) {
-	url := fmt.Sprintf("%s/movie/%d/credits", cl.baseURL, id)
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
-	if err != nil {
-		return tmdb.RespTMDBActors{}, err
-	}
-	req.Header.Set("X-API-KEY", cl.token)
-	resp, err := cl.httpClient.Do(req)
-	if err != nil {
-		return tmdb.RespTMDBActors{}, err
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		body, _ := io.ReadAll(resp.Body)
-		return tmdb.RespTMDBActors{}, fmt.Errorf(
-			"tmdb search actros failed: status=%d body=%s",
-			resp.StatusCode,
-			string(body),
-		)
-	}
-
-	var respCast tmdb.RespTMDBActors
-	if err := json.NewDecoder(resp.Body).Decode(&respCast); err != nil {
-		return tmdb.RespTMDBActors{}, err
-	}
-	return respCast, nil
-}
-*/
