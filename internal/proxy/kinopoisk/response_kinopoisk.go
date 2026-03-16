@@ -53,6 +53,7 @@ type RespKPSearchID struct {
 	Votes       Vote        `json:"votes"`
 	Countries   []Countries `json:"countries"`
 	ExternalId  ExternalId  `json:"externalId"`
+	Awards      []KPAward   `json:"awards"`
 }
 
 type ExternalId struct {
@@ -72,4 +73,20 @@ type Actors struct {
 type Seasons struct {
 	Number        int `json:"number"`
 	EpisodesCount int `json:"episodesCount"`
+}
+
+type KPAward struct {
+	MovieID    int          `json:"movieId"`
+	Nomination KPNomination `json:"nomination"`
+	Winning    bool         `json:"winning"`
+}
+
+type KPNomination struct {
+	Award KPAwardInfo `json:"award"`
+	Title string      `json:"title"`
+}
+
+type KPAwardInfo struct {
+	Title string `json:"title"`
+	Year  int    `json:"year"`
 }

@@ -16,6 +16,7 @@ type Movie_Entity struct {
 	Cast        []Actors
 	SeasonsInfo []Seasons
 	Countries   []string
+	Awards      []string
 }
 
 type KPRatings struct {

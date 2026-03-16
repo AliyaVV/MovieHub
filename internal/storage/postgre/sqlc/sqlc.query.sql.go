@@ -222,6 +222,23 @@ func (q *Queries) GetMovie(ctx context.Context, kpID sql.NullInt32) (GetMovieRow
 	return i, err
 }
 
+const saveAwards = `-- name: SaveAwards :exec
+INSERT INTO awards(
+    movie_id,
+    award
+) VALUES ($1,$2)
+`
+
+type SaveAwardsParams struct {
+	MovieID sql.NullInt32  `json:"movie_id"`
+	Award   sql.NullString `json:"award"`
+}
+
+func (q *Queries) SaveAwards(ctx context.Context, arg SaveAwardsParams) error {
+	_, err := q.db.ExecContext(ctx, saveAwards, arg.MovieID, arg.Award)
+	return err
+}
+
 const saveCast = `-- name: SaveCast :exec
 INSERT INTO casts(
     movie_id,

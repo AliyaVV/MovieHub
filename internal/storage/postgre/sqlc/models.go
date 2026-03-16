@@ -8,6 +8,12 @@ import (
 	"database/sql"
 )
 
+type Award struct {
+	ID      int32          `json:"id"`
+	MovieID sql.NullInt32  `json:"movie_id"`
+	Award   sql.NullString `json:"award"`
+}
+
 type Cast struct {
 	ID          int32          `json:"id"`
 	MovieID     sql.NullInt32  `json:"movie_id"`

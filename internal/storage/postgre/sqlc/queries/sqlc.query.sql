@@ -100,3 +100,11 @@ ON mv.id = rs.movie_id
 -- name: GetGenreByName :one
 SELECT id FROM genres
 WHERE name = $1;
+
+-- name: SaveAwards :exec
+INSERT INTO awards(
+    movie_id,
+    award
+) VALUES ($1,$2);
+
+
