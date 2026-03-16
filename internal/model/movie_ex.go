@@ -5,7 +5,7 @@ type Movie_ex struct {
 	Movie_short
 	Description string
 	Top250      int
-	Ratings
+	//Ratings
 	Country []string
 	Poster  string
 	Cast    []Cast

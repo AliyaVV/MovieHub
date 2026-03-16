@@ -23,34 +23,31 @@ type MovieService struct {
 // сервис по получению расширенных данных по ид фильма
 func (ms *MovieService) GetMovieById(ctx context.Context, id int) (*model.Movie_ex, error) {
 	var movie *model.Movie_ex
-
 	//проверяем БД
 	movieFromDB, err := ms.MovieRepo.GetMovieById(ctx, id)
 	if err == nil {
 		fmt.Printf("Movie with ID %d found in DB", id)
 		return movieFromDB, nil
 	}
-
 	if err.Error() != "GetMovieById: Movie does not exists" {
 
 		fmt.Printf("Movie Found DB error: %v\n", err)
 	} else {
-		fmt.Printf("Movie with ID %d dont found in DB\n", id)
+		fmt.Printf("Movie with ID %d does not found in DB\n", id)
 	}
 	resp_kp, err := ms.KPInterface.GetByID(ctx, id)
 	if err != nil {
 		return nil, err
 	}
 	id_tmdb := resp_kp.ExternalId.TMDB
-
 	movie_base, err := kpmapper.GetBaseMovie(resp_kp)
 	if err != nil {
 		return nil, err
 	}
-
 	kpmapper.MapKPDetailToEntity(movie_base, resp_kp)
 
 	if id_tmdb == 0 {
+		fmt.Println("Аггрегируем1")
 		movie, err = agg_movie_ex(movie_base, nil)
 		if err != nil {
 			fmt.Println("error aggregate: ", err)
@@ -74,12 +71,13 @@ func (ms *MovieService) GetMovieById(ctx context.Context, id int) (*model.Movie_
 			}
 			return movie, nil
 		}
-
+		fmt.Println("Аггрегируем3")
 		movie, err = agg_movie_ex(movie_base, resp_tmdb)
 		_, err = ms.MovieRepo.SaveMovie(ctx, movie)
 		if err != nil {
 			fmt.Println("error SaveMovie: ", err)
 		}
+
 		return movie, nil
 	}
 }

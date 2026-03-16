@@ -38,6 +38,11 @@ func agg_movie_ex(kp *kpmapper.Movie_Entity, tmdb *tmdbmapper.Tmdb_movie_midl) (
 			ExternalId: model.ExternalId{
 				TMDB: kp.IDTmdb,
 			},
+			Ratings: model.Ratings{
+				KP:                 kp.Ratings.KP,
+				FilmCritic:         kp.Ratings.FilmCritics,
+				RussianFilmCritics: kp.Ratings.RussianFilmCritics,
+			},
 		},
 		Source: model.Source{
 			KPHD: true,
@@ -45,13 +50,8 @@ func agg_movie_ex(kp *kpmapper.Movie_Entity, tmdb *tmdbmapper.Tmdb_movie_midl) (
 		},
 		Description: kp.Description,
 		Top250:      kp.Top250,
-		Ratings: model.Ratings{
-			KP:                 kp.Ratings.KP,
-			FilmCritic:         kp.Ratings.FilmCritics,
-			RussianFilmCritics: kp.Ratings.RussianFilmCritics,
-		},
-		Country: kp.Countries,
-		Cast:    cast,
+		Country:     kp.Countries,
+		Cast:        cast,
 	}
 	if tmdb != nil {
 		movie_ex.ExternalId.TMDB = tmdb.ID
