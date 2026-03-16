@@ -2,6 +2,7 @@ package kpmapper
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/AliyaVV/MovieHub/internal/model"
 	"github.com/AliyaVV/MovieHub/internal/proxy/kinopoisk"
@@ -81,6 +82,8 @@ func GetBaseMovie(resp kinopoisk.RespKPSearchID) (*Movie_Entity, error) {
 			countries = append(countries, val.Name)
 		}
 	}
+	fmt.Println("Awards", ConvertAwards(resp.Awards))
+
 	return &Movie_Entity{
 		ID:          resp.ID,
 		Name:        resp.Name,
@@ -101,5 +104,31 @@ func GetBaseMovie(resp kinopoisk.RespKPSearchID) (*Movie_Entity, error) {
 			RussianFilmCritics: resp.Votes.RussianFilmCritics,
 		},
 		IDTmdb: resp.ExternalId.TMDB,
+		Awards: ConvertAwards(resp.Awards),
 	}, nil
+}
+
+func ConvertAwards(awards []kinopoisk.KPAward) []string {
+
+	result := make([]string, 0, len(awards))
+
+	for i, a := range awards {
+		if i >= 6 {
+			break
+		}
+		title := fmt.Sprintf(
+			"%s %d — %s",
+			a.Nomination.Award.Title,
+			a.Nomination.Award.Year,
+			a.Nomination.Title,
+		)
+
+		if a.Winning {
+			title += " (winner)"
+		}
+
+		result = append(result, title)
+	}
+
+	return result
 }

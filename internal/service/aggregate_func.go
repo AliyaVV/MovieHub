@@ -52,6 +52,7 @@ func agg_movie_ex(kp *kpmapper.Movie_Entity, tmdb *tmdbmapper.Tmdb_movie_midl) (
 		Top250:      kp.Top250,
 		Country:     kp.Countries,
 		Cast:        cast,
+		Awards:      kp.Awards,
 	}
 	if tmdb != nil {
 		movie_ex.ExternalId.TMDB = tmdb.ID

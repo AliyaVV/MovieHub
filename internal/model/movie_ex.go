@@ -5,15 +5,14 @@ type Movie_ex struct {
 	Movie_short
 	Description string
 	Top250      int
-	//Ratings
-	Country []string
-	Poster  string
-	Cast    []Cast
-	Awards  []string
-	Budget  int
-	Revenue int
-	Seasons []Seasons
-	Source  Source
+	Country     []string
+	Poster      string
+	Cast        []Cast
+	Awards      []string
+	Budget      int
+	Revenue     int
+	Seasons     []Seasons
+	Source      Source
 }
 type MovieGenres struct {
 	Name string

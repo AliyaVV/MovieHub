@@ -113,6 +113,13 @@ func (mv *MovieRepo) SaveMovie(ctx context.Context, movie *model.Movie_ex) (int3
 			return 0, err
 		}
 	}
+	for _, a := range movie.Awards {
+		err = q.SaveAwards(ctx, repository.SaveAwardsParams{
+			MovieID: NullToInt32(movieID),
+			Award:   NullToString(a),
+		})
+	}
+
 	if err = trx.Commit(); err != nil {
 		fmt.Println("Commit Error", err)
 		return 0, err
