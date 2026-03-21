@@ -4,6 +4,8 @@ import (
 	"log"
 	"net"
 
+	pb "github.com/AliyaVV/MovieHub/api/pb"
+	"github.com/AliyaVV/MovieHub/internal/service"
 	"google.golang.org/grpc"
 )
 
@@ -14,7 +16,10 @@ func main() {
 	}
 
 	grpcServer := grpc.NewServer()
-	//pb.RegisterMovieServiceServer(grpcServer, &pb.MovieGRPCServer{})
+	movieService := &service.MovieService{}
+	pb.RegisterMovieServiceServer(grpcServer, &pb.MovieGRPCServer{
+		Service: movieService,
+	})
 
 	log.Println("Server started on port 50051")
 
