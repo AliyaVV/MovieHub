@@ -24,6 +24,10 @@ import (
 
 	//"github.com/jackc/pgx"
 	"github.com/joho/godotenv"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+
+	_ "github.com/AliyaVV/MovieHub/docs"
 )
 
 func runMigrations(db *sql.DB) error {
@@ -37,6 +41,11 @@ func runMigrations(db *sql.DB) error {
 	return nil
 }
 
+// @title MovieHub API
+// @version 1.0
+// @description API для работы с фильмами
+// @host localhost:8080
+// @BasePath /
 func main() {
 
 	redisClient := redis.InitRedis()
@@ -97,6 +106,7 @@ func main() {
 		Addr:    ":8080",
 		Handler: r,
 	}
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
 	// запуск сервера
