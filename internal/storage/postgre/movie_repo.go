@@ -161,12 +161,11 @@ func (mv *MovieRepo) GetMovieById(ctx context.Context, id int) (*model.Movie_ex,
 	if err != nil {
 		return nil, fmt.Errorf("GetMovieById: error to get movie: %w", err)
 	}
-
-	genres, err := q.GetGenres(ctx, int32(id))
+	genres, err := q.GetGenres(ctx, int32(movie.ID))
 	if err != nil {
 		return nil, fmt.Errorf("GetMovieById: error to get genres: %w", err)
 	}
-	cast, err := q.GetCast(ctx, NullToInt32(int32(id)))
+	cast, err := q.GetCast(ctx, NullToInt32(int32(movie.ID)))
 	if err != nil {
 		return nil, fmt.Errorf("GetMovieById: error to get cast: %w", err)
 	}

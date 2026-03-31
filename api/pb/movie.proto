@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package movie;
 
-option go_package = "github.com/AliyaVV/MovieHub/grpc/pb";
+option go_package = "github.com/AliyaVV/MovieHub/api/pb";
 
 service MovieService {
   rpc CreateMovie (CreateMovieRequest) returns (MovieShortResponse);
