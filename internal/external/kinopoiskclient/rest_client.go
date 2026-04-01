@@ -45,7 +45,12 @@ func (cl *client) SearchByTitle(ctx context.Context, title string) ([]*model.Mov
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func() {
+		if err := resp.Body.Close(); err != nil {
+			fmt.Println("Error close Body", err)
+		}
+	}()
+
 	if resp.StatusCode != http.StatusOK {
 		body, _ := io.ReadAll(resp.Body)
 		return nil, fmt.Errorf(
