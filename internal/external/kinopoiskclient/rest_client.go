@@ -91,7 +91,13 @@ func (cl *client) GetByID(ctx context.Context, id int) (kinopoisk.RespKPSearchID
 			string(body),
 		)
 	}
-	defer resp.Body.Close()
+
+	defer func() {
+		if err := resp.Body.Close(); err != nil {
+			fmt.Println("Error close body", err)
+		}
+	}()
+
 	var kpRespId kinopoisk.RespKPSearchID
 	if err := json.NewDecoder(resp.Body).Decode(&kpRespId); err != nil {
 		return kinopoisk.RespKPSearchID{}, err

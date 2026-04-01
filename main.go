@@ -72,7 +72,11 @@ func connectDB(dbURL string) (*sql.DB, error) {
 func main() {
 
 	redisClient := redis.InitRedis()
-	defer redisClient.Close()
+	defer func() {
+		if err := redisClient.Close(); err != nil {
+			fmt.Println("Error close redis", err)
+		}
+	}()
 
 	err := godotenv.Load()
 	if err != nil {
@@ -91,7 +95,12 @@ func main() {
 	db.SetMaxOpenConns(25)
 	db.SetMaxIdleConns(25)
 	db.SetConnMaxLifetime(5 * time.Minute)
-	defer db.Close()
+	defer func() {
+		if err := db.Close(); err != nil {
+			log.Println("Error close DB", err)
+		}
+	}()
+
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	err = db.PingContext(ctx)
