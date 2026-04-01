@@ -19,7 +19,11 @@ func main() {
 	if err != nil {
 		log.Fatal("cannot connect:", err)
 	}
-	defer conn.Close()
+	defer func() {
+		if err := conn.Close(); err != nil {
+			log.Println("Error close redis", err)
+		}
+	}()
 
 	client := pb.NewMovieServiceClient(conn)
 
