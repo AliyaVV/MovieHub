@@ -31,14 +31,37 @@ import (
 )
 
 func runMigrations(db *sql.DB) error {
-	goose.SetDialect("postgres")
-
-	if err := goose.Up(db, "internal/storage/postgre/migrations"); err != nil {
+	if err := goose.SetDialect("postgres"); err != nil {
+		return fmt.Errorf("failed to set dialect: %w", err)
+	}
+	fmt.Println("Migra", os.Getenv("GOOSE_MIGRATION_DIR"))
+	migrDir := os.Getenv("GOOSE_MIGRATION_DIR")
+	if err := goose.Up(db, migrDir); err != nil {
 		return err
 	}
 
 	log.Println("Migrations applied successfully")
 	return nil
+}
+
+func connectDB(dbURL string) (*sql.DB, error) {
+	var db *sql.DB
+	var err error
+
+	for i := 0; i < 10; i++ {
+		db, err = sql.Open("postgres", dbURL)
+		if err == nil {
+			err = db.Ping()
+			if err == nil {
+				return db, nil
+			}
+		}
+		log.Println("ошибка", err)
+		log.Println("Waiting for DB...")
+		time.Sleep(2 * time.Second)
+	}
+
+	return nil, err
 }
 
 // @title MovieHub API
@@ -61,7 +84,7 @@ func main() {
 		log.Fatal("DB_URL environment variable is not set")
 	}
 
-	db, err := sql.Open("postgres", dbURL)
+	db, err := connectDB(dbURL)
 	if err != nil {
 		log.Fatal("Unable to connect to database")
 	}

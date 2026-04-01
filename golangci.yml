@@ -1,0 +1,21 @@
+# .golangci.yml
+linters:
+  enable:
+    - errcheck        # Проверка обработки ошибок
+    - gosimple        # Упрощение кода
+    - govet           # Встроенный анализатор Go
+    - ineffassign     # Поиск бесполезных присваиваний
+    - staticcheck     # Статический анализ
+    - unused          # Поиск неиспользуемого кода
+    - misspell        # Поиск опечаток
+    - gofmt           # Проверка форматирования
+    - goimports       # Проверка импортов
+
+run:
+  timeout: 5m
+  tests: true
+
+issues:
+  exclude-use-default: false
+  max-issues-per-linter: 0
+  max-same-issues: 0
