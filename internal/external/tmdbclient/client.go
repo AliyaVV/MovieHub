@@ -48,7 +48,13 @@ func (cl *client) SearchByTitle(ctx context.Context, title string) ([]*tmdbmappe
 		fmt.Println("err1", err)
 		return nil, err
 	}
-	defer resp.Body.Close()
+
+	defer func() {
+		if err := resp.Body.Close(); err != nil {
+			fmt.Println("Error close body", err)
+		}
+	}()
+
 	if resp.StatusCode != http.StatusOK {
 		body, _ := io.ReadAll(resp.Body)
 		return nil, fmt.Errorf(
@@ -82,7 +88,11 @@ func (cl *client) GetByID(ctx context.Context, id int) (*tmdbmapper.Tmdb_movie_m
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func() {
+		if err := resp.Body.Close(); err != nil {
+			fmt.Println("Error close body", err)
+		}
+	}()
 	if resp.StatusCode != http.StatusOK {
 		body, _ := io.ReadAll(resp.Body)
 		return nil, fmt.Errorf(

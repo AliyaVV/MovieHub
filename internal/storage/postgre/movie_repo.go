@@ -56,7 +56,6 @@ func (mv *MovieRepo) SaveMovie(ctx context.Context, movie *model.Movie_ex) (int3
 
 	defer func() {
 		if err := trx.Rollback(); err != nil && err != sql.ErrTxDone {
-			// Логируем ошибку, но не возвращаем (т.к. мы уже в defer)
 			fmt.Printf("Error rolling back transaction: %v\n", err)
 		}
 	}()
@@ -80,10 +79,10 @@ func (mv *MovieRepo) SaveMovie(ctx context.Context, movie *model.Movie_ex) (int3
 
 	err = q.SaveRating(ctx, repository.SaveRatingParams{
 		MovieID:            NullToInt32(movieID),
-		Kp:                 NullToFloat64(movie.Movie_short.Ratings.KP),
-		Tmdb:               NullToFloat64(movie.Movie_short.Ratings.TMDB),
-		FilmCritic:         NullToFloat64(movie.Movie_short.Ratings.FilmCritic),
-		RussianFilmCritics: NullToFloat64(movie.Movie_short.Ratings.RussianFilmCritics),
+		Kp:                 NullToFloat64(movie.Ratings.KP),
+		Tmdb:               NullToFloat64(movie.Ratings.TMDB),
+		FilmCritic:         NullToFloat64(movie.Ratings.FilmCritic),
+		RussianFilmCritics: NullToFloat64(movie.Ratings.RussianFilmCritics),
 	})
 	if err != nil {
 		return 0, err
