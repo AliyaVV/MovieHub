@@ -54,7 +54,12 @@ func (mv *MovieRepo) SaveMovie(ctx context.Context, movie *model.Movie_ex) (int3
 	fmt.Printf("Transaction started: %v\n", trx)
 	q := repository.New(trx)
 
-	defer trx.Rollback()
+	defer func() {
+		if err := trx.Rollback(); err != nil && err != sql.ErrTxDone {
+			// Логируем ошибку, но не возвращаем (т.к. мы уже в defer)
+			fmt.Printf("Error rolling back transaction: %v\n", err)
+		}
+	}()
 
 	movieID, err := q.SaveMovie(ctx, repository.SaveMovieParams{
 		RuName:      NullToString(movie.Runame),
@@ -114,10 +119,12 @@ func (mv *MovieRepo) SaveMovie(ctx context.Context, movie *model.Movie_ex) (int3
 		}
 	}
 	for _, a := range movie.Awards {
-		err = q.SaveAwards(ctx, repository.SaveAwardsParams{
+		if err = q.SaveAwards(ctx, repository.SaveAwardsParams{
 			MovieID: NullToInt32(movieID),
 			Award:   NullToString(a),
-		})
+		}); err != nil {
+			fmt.Println("Save Awards", err)
+		}
 	}
 
 	if err = trx.Commit(); err != nil {

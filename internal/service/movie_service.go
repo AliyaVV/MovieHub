@@ -48,7 +48,7 @@ func (ms *MovieService) GetMovieById(ctx context.Context, id int) (*model.Movie_
 	if err != nil {
 		return nil, err
 	}
-	kpmapper.MapKPDetailToEntity(movie_base, resp_kp)
+	_ = kpmapper.MapKPDetailToEntity(movie_base, resp_kp)
 
 	if id_tmdb == 0 {
 		movie, err = agg_movie_ex(movie_base, nil)
@@ -76,6 +76,9 @@ func (ms *MovieService) GetMovieById(ctx context.Context, id int) (*model.Movie_
 			return movie, nil
 		}
 		movie, err = agg_movie_ex(movie_base, resp_tmdb)
+		if err != nil {
+			log.Println("Aggregate error:", err)
+		}
 		_, err = ms.MovieRepo.SaveMovie(ctx, movie)
 		if err != nil {
 			log.Println("error SaveMovie: ", err)
